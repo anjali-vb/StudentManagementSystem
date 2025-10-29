@@ -1,0 +1,76 @@
+﻿@{
+    var username = Context.Session.GetString("Username");
+    var role = Context.Session.GetString("Role");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Student Records</title>
+
+    <!--  Bootstrap CSS (via CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+
+    <!--  Your custom global styles -->
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!--  Scoped layout-specific styles -->
+    <link rel="stylesheet" href="~/Views/Shared/_Layout.cshtml.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="#">StudentRecords</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    @if (role == "Invigilator")
+                    {
+                        <li class="nav-item"><a class="nav-link" asp-controller="Student" asp-action="Index">All Students</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Student" asp-action="Create">Add Student</a></li>
+                    }
+                    else if (role == "Student")
+                    {
+                        <li class="nav-item"><a class="nav-link" asp-controller="Student" asp-action="ViewOwn">My Record</a></li>
+                    }
+                </ul>
+                <ul class="navbar-nav">
+                    @if (!string.IsNullOrEmpty(username))
+                    {
+                        <li class="nav-item">
+                            <span class="nav-link">Hello, @username (@role)</span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" asp-controller="Account" asp-action="Logout">Logout</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <footer class="footer text-center mt-4 py-3 border-top text-muted">
+        <div class="container">
+            <small>&copy; @(DateTime.Now.Year) Student Management System</small>
+        </div>
+    </footer>
+
+    <!--  Bootstrap JS (via CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

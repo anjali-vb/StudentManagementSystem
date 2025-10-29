@@ -1,0 +1,68 @@
+﻿@model StudentRecordManagementSystem.Models.Entities.Student
+@{
+    ViewData["Title"] = "Create Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Student</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}
+@if (ViewBag.ModelErrors != null)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var e in (List<string>)ViewBag.ModelErrors)
+            {
+                <li>@e</li>
+            }
+        </ul>
+    </div>
+}
+
+<form asp-action="Create" method="post" class="w-50">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input asp-for="Name" class="form-control" maxlength="30" required />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Roll Number (leave blank to auto-generate)</label>
+        <input asp-for="RollNumber" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Maths</label>
+        <input asp-for="Maths" class="form-control" min="1" max="100" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Physics</label>
+        <input asp-for="Physics" class="form-control" min="1" max="100" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Chemistry</label>
+        <input asp-for="Chemistry" class="form-control" min="1" max="100" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">English</label>
+        <input asp-for="English" class="form-control" min="1" max="100" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Programming</label>
+        <input asp-for="Programming" class="form-control" min="1" max="100" required />
+    </div>
+
+    <button class="btn btn-success" type="submit">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
