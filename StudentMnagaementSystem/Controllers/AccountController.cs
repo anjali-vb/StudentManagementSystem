@@ -37,8 +37,7 @@ namespace StudentRecordManagementSystem.Controllers
                 else
                     return RedirectToAction("Details", "Student", new { rollNumber = user.StudentRollNumber });
             }
-
-            ViewBag.Message = "Invalid username or password";
+            ViewBag.Message = $"Invalid username or password. (Submitted username: '{username}', password: '{password}')";
             return View();
         }
 

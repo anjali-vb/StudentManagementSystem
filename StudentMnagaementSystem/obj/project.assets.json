@@ -470,23 +470,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\anjal\\.nuget\\packages\\": {},
+    "C:\\Users\\preet\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\5Machinetest\\StudentMnagaementSystem\\StudentMnagaementSystem\\StudentRecordManagementSystem.csproj",
+      "projectUniqueName": "D:\\StudentManagementSystem\\StudentMnagaementSystem\\StudentRecordManagementSystem.csproj",
       "projectName": "StudentRecordManagementSystem",
-      "projectPath": "C:\\5Machinetest\\StudentMnagaementSystem\\StudentMnagaementSystem\\StudentRecordManagementSystem.csproj",
-      "packagesPath": "C:\\Users\\anjal\\.nuget\\packages\\",
-      "outputPath": "C:\\5Machinetest\\StudentMnagaementSystem\\StudentMnagaementSystem\\obj\\",
+      "projectPath": "D:\\StudentManagementSystem\\StudentMnagaementSystem\\StudentRecordManagementSystem.csproj",
+      "packagesPath": "C:\\Users\\preet\\.nuget\\packages\\",
+      "outputPath": "D:\\StudentManagementSystem\\StudentMnagaementSystem\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\anjal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\preet\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

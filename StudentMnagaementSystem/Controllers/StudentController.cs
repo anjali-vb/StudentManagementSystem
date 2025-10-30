@@ -83,11 +83,34 @@ namespace StudentRecordManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Delete(int rollNumber)
         {
-            _studentService.DeleteStudent(rollNumber);
+            try
+            {
+                _studentService.DeleteStudent(rollNumber);
+            }
+            catch (Exception ex)
+            {
+                // Pass error message to Index view using TempData
+                TempData["DeleteError"] = "Cannot delete the student. They may still be referenced by a User, or there was a database error.";
+            }
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Details(int rollNumber)
+        {
+            var userRole = HttpContext.Session.GetString("Role");
+            var sessionRoll = HttpContext.Session.GetInt32("StudentRollNumber");
+
+            // Student can only access their own record; invigilator can access any
+            if (userRole == "Student" && sessionRoll != rollNumber)
+                return RedirectToAction("Login", "Account");
+
+            var student = _studentService.GetStudentByRoll(rollNumber);
+            if (student == null) return NotFound();
+            return View(student);
         }
 
     }

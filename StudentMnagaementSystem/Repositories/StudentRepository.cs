@@ -85,11 +85,21 @@ namespace StudentRecordManagementSystem.Models.Repositories
         public void DeleteStudent(int rollNumber)
         {
             using SqlConnection con = new(_connectionString);
-            using SqlCommand cmd = new("sp_DeleteStudent", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@RollNumber", rollNumber);
             con.Open();
-            cmd.ExecuteNonQuery();
+
+            // Delete users that reference this student to avoid FK error
+            using (var cmdUser = new SqlCommand("DELETE FROM dbo.Users WHERE StudentRollNumber = @RollNumber", con))
+            {
+                cmdUser.Parameters.AddWithValue("@RollNumber", rollNumber);
+                cmdUser.ExecuteNonQuery();
+            }
+
+            using (var cmd = new SqlCommand("sp_DeleteStudent", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@RollNumber", rollNumber);
+                cmd.ExecuteNonQuery();
+            }
         }
 
         public int GenerateNextRollNumber()
